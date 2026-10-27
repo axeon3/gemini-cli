@@ -1,116 +1,16 @@
 version: 2
 updates:
-  # =========================================================================
-  # INFRASTRUCTURE & AUTOMATION LAYER
-  # =========================================================================
+  # Monitor all npm package.json files
+  - package-ecosystem: "npm"
+    directories:
+      - "/**"
+    schedule:
+      interval: "daily"
+    allow:
+      - dependency-type: "all"
 
-  # Scan CI/CD Pipelines
+  # Monitor all GitHub Actions workflow files (.github/workflows)
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
-      day: "monday"
-    open-pull-requests-limit: 10
-    reviewers:
-      - "joshualitt"
-    cooldown:
-      semver-major-days: 14
-      semver-minor-days: 14
-      semver-patch-days: 14
-    groups:
-      actions-dependencies:
-        patterns:
-          - "*"
-        update-types:
-          - "minor"
-          - "patch"
-
-  # Scan Docker environments
-  - package-ecosystem: "docker"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-    open-pull-requests-limit: 10
-    reviewers:
-      - "joshualitt"
-    cooldown:
-      semver-major-days: 14
-      semver-minor-days: 14
-      semver-patch-days: 14
-
-  # Scan Infrastructure as Code (Terraform)
-  - package-ecosystem: "terraform"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-    open-pull-requests-limit: 10
-    reviewers:
-      - "joshualitt"
-    cooldown:
-      semver-major-days: 14
-      semver-minor-days: 14
-      semver-patch-days: 14
-
-  # =========================================================================
-  # APPLICATION BACKEND & DATA LAYER
-  # =========================================================================
-
-  # Scan Python Environment
-  - package-ecosystem: "pip"
-    directory: "/"
-    schedule:
-      interval: "daily"
-    open-pull-requests-limit: 10
-    reviewers:
-      - "joshualitt"
-    cooldown:
-      semver-major-days: 14
-      semver-minor-days: 14
-      semver-patch-days: 14
-
-  # Scan Node.js Backend/Frontend
-  - package-ecosystem: "npm"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-    open-pull-requests-limit: 10
-    reviewers:
-      - "joshualitt"
-    cooldown:
-      semver-major-days: 14
-      semver-minor-days: 14
-      semver-patch-days: 14
-    groups:
-      npm-dependencies:
-        patterns:
-          - "*"
-        update-types:
-          - "minor"
-          - "patch"
-
-  # Scan Go Environment
-  - package-ecosystem: "go"
-    directory: "/"
-    schedule:
-      interval: "daily"
-    open-pull-requests-limit: 10
-    reviewers:
-      - "joshualitt"
-    cooldown:
-      semver-major-days: 14
-      semver-minor-days: 14
-      semver-patch-days: 14
-
-  # Scan Java/Kotlin Environments
-  - package-ecosystem: "maven"
-    directory: "/"
-    schedule:
-      interval: "daily"
-    open-pull-requests-limit: 10
-    reviewers:
-      - "joshualitt"
-    cooldown:
-      semver-major-days: 14
+      interval: "hourly"
